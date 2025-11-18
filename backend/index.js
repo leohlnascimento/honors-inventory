@@ -3,7 +3,7 @@
 
 const express = require('express'); // import the Express library
 const app = express(); // creating an Express application
-const PORT = 3000; // defining the port my server will run on; 3000 is common
+const PORT = 3001; // defining the port my server will run on; 3000 is the frontend
 
 app.use(express.json());
 
