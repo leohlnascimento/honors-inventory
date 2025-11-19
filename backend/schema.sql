@@ -1,11 +1,11 @@
--- Locations table
+-- locations table
 CREATE TABLE IF NOT EXISTS locations (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     room_name TEXT NOT NULL,
     building_type TEXT NOT NULL
 );
 
--- Equipment table
+-- equipment table
 CREATE TABLE IF NOT EXISTS equipment (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     model TEXT NOT NULL,
@@ -14,11 +14,12 @@ CREATE TABLE IF NOT EXISTS equipment (
     FOREIGN KEY (location_id) REFERENCES locations(id)
 );
 
--- Sample data
+-- sample data
 INSERT INTO locations (room_name, building_type) VALUES
 ('HON Warehouse', 'Warehouse'),
 ('HON 3017', 'Classroom'),
-('HON 4015B', 'Office');
+('HON 4015B', 'Office'),
+('Hon 2010', 'Classroom');
 
 INSERT INTO equipment (model, equipment_type, location_id) VALUES
 ('HP LaserJet', 'Printer', 2),
