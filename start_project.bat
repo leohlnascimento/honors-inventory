@@ -3,18 +3,25 @@ echo Starting Honors Inventory Project...
 
 :: ask if the user wants to reinitialize the database
 set /p INITDB="Do you want to reinitialize the database? (y/N) "
-if /i "%INITDB%"=="y" (
-    :: second confirmation
-    set /p CONFIRM="Are you SURE? The database cannot be recovered. (y/N) "
-    if /i "%CONFIRM%"=="y" (
-        echo Initializing database...node "%~dp0backend\init_db.js"
-    ) else (
-        echo Database initialization cancelled.
-    )
-) else (
-    echo Database initialization skipped.
-)
 
+if /i "%INITDB%"=="y" goto confirm_db
+echo Database initialization skipped.
+goto continue
+
+:confirm_db
+set /p CONFIRM="Are you SURE? The database cannot be recovered. (y/N) "
+if /i "%CONFIRM%"=="y" goto init_db
+echo Database initialization cancelled.
+goto continue
+
+:init_db
+echo Initializing database...
+cd /d "%~dp0backend"
+node "init_db.js"
+cd ..
+goto continue
+
+:continue
 REM Start backend
 cd /d "%~dp0backend"
 :: we use start to open a new terminal window

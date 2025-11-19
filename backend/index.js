@@ -11,7 +11,9 @@ app.use(express.json());
 
 // load routes
 const equipmentRoutes = require('./src/routes/equipmentRoutes');
+const locationRoutes = require('./src/routes/locationRoutes')
 app.use('/equipment', equipmentRoutes);
+app.use('/locations', locationRoutes);
 
 // initially, here I connected with the database
 // but now that code is in db.js
