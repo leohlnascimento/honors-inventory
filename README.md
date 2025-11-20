@@ -18,7 +18,9 @@ Make sure you have Node.js installed.
 - Windows
 ```bat
 .\start_project.bat
-
+```
 - Linux / MacOS
+```sh
 chmod +x start_project.sh
 ./start_project.sh
+```
