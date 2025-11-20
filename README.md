@@ -21,6 +21,11 @@ Make sure you have Node.js installed.
 ```
 - Linux / MacOS
 ```sh
-chmod +x start_project.sh
-./start_project.sh
+cd backend
+npm install        # if dependencies aren't installed yet
+node index.js
+# open new terminal
+cd frontend
+npm install        # if dependencies aren't installed yet
+npm start
 ```
