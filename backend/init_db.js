@@ -6,7 +6,7 @@ const sqlite3 = require('sqlite3').verbose();
 const fs = require('fs');
 
 const dbFile = './database.db';
-const schemaFile = './schema.sql';
+const schemaFile = '../schema.sql';
 
 // Delete existing database
 fs.unlinkSync(dbFile);
