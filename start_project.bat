@@ -5,6 +5,13 @@ echo ==========================================
 echo    HONORS INVENTORY PROJECT MANAGER      
 echo ==========================================
 
+where node >nul 2>nul
+if %errorlevel% neq 0 (
+    echo ❌ Error: Node.js is not installed. Please install it from https://nodejs.org/
+    pause
+    exit /b
+)
+
 :: 1. check for node_modules at root
 if not exist "node_modules" (
   echo 📦 Initializing workspace and installing dependencies...

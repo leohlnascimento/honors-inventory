@@ -4,6 +4,11 @@ echo "=========================================="
 echo "   HONORS INVENTORY PROJECT MANAGER      "
 echo "=========================================="
 
+if ! command -v node &> /dev/null; then
+    echo "❌ Error: Node.js is not installed. Please install it from https://nodejs.org/"
+    exit 1
+fi
+
 # 1. check for node_modules at root
 if [ ! -d "node_modules" ]; then
   echo "📦 Initializing workspace and installing dependencies..."
