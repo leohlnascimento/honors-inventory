@@ -85,8 +85,8 @@ const EquipmentList: React.FC<Props> = ({
               <td>{eq.id}</td>
               <td>{eq.model}</td>
               <td>{eq.equipment_type}</td>
-              <td>{eq.room_name}</td>
-              <td>{eq.building_type}</td>
+              <td>{eq.location?.room_name}</td>
+              <td>{eq.location?.building_type}</td>
               <td>
                 <button className="delete" onClick={() => handleDelete(eq.id)}>Delete</button>
                 <button 

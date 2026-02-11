@@ -60,7 +60,7 @@ const TransferForm: React.FC<Props> = ({ equipment, setEquipment }) => {
             <option value="">Select equipment</option>
             {equipment.map(eq => (
               <option key={eq.id} value={eq.id}>
-                {eq.model} ({eq.room_name})
+                {eq.model} ({eq.location?.room_name})
               </option>
             ))}
           </select>

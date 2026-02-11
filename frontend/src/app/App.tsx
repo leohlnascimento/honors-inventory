@@ -19,7 +19,7 @@ const App: React.FC = () => {
   // fetch equipment on initial load
   useEffect(() => {
     getAllEquipment()
-      .then((res: any) => setEquipment(res.data))
+      .then(res => setEquipment(res.data))
       .catch(() => setError('Failed to fetch equipment'))
       .finally(() => setLoading(false));
   }, []);
@@ -28,7 +28,7 @@ const App: React.FC = () => {
   const handleEquipmentAdded = () => {
     setLoading(true);
     getAllEquipment()
-      .then((res: any) => setEquipment(res.data))
+      .then(res => setEquipment(res.data))
       .catch(() => setError('Failed to fetch equipment'))
       .finally(() => setLoading(false));
   };

@@ -1,8 +1,8 @@
 -- locations table
 CREATE TABLE IF NOT EXISTS locations (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    room_name TEXT NOT NULL,
-    building_type TEXT NOT NULL
+    room_name TEXT NOT NULL UNIQUE,
+    building_type TEXT CHECK(building_type IN ('Classroom', 'Office', 'Warehouse')) NOT NULL
 );
 
 -- equipment table
@@ -10,12 +10,13 @@ CREATE TABLE IF NOT EXISTS equipment (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     model TEXT NOT NULL,
     equipment_type TEXT NOT NULL,
-    location_id INTEGER,
-    FOREIGN KEY (location_id) REFERENCES locations(id)
+    location_id INTEGER NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (location_id) REFERENCES locations(id) ON DELETE RESTRICT
 );
 
 -- sample data
-INSERT INTO locations (room_name, building_type) VALUES
+INSERT OR IGNORE INTO locations (room_name, building_type) VALUES
 ('HON Warehouse', 'Warehouse'),
 ('HON 3017', 'Classroom'),
 ('HON 4015B', 'Office'),
