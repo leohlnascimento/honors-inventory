@@ -25,12 +25,5 @@ chmod +x start_project.sh
 ```
 - Linux / MacOS
 ```sh
-cd backend
-npm install        # if dependencies aren't installed yet
-node init_db.js    # if wishes to reinitialize the database
-node index.js
-# open new terminal
-cd frontend
-npm install        # if dependencies aren't installed yet
-npm start
+./start_project.sh
 ```
