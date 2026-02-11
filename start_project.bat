@@ -1,41 +1,37 @@
 @echo off
-echo Starting Honors Inventory Project...
+setlocal enabledelayedexpansion
 
-:: ask if the user wants to reinitialize the database
-set /p INITDB="Do you want to reinitialize the database? (y/N) "
+echo ==========================================
+echo    HONORS INVENTORY PROJECT MANAGER      
+echo ==========================================
 
-if /i "%INITDB%"=="y" goto confirm_db
-echo Database initialization skipped.
-goto continue
+:: 1. check for node_modules at root
+if not exist "node_modules" (
+  echo 📦 Initializing workspace and installing dependencies...
+  call npm install
+) else (
+  echo 📦 Synchronizing dependencies...
+  :: faster if almost everything is already installed
+  call npm install --no-audit --no-fund
+)
 
-:confirm_db
-set /p CONFIRM="Are you SURE? The database cannot be recovered. (y/N) "
-if /i "%CONFIRM%"=="y" goto init_db
-echo Database initialization cancelled.
-goto continue
+:: 2. optional db reset
+set /p INITDB="🔄 Reinitialize database? (y/N) "
+if /i "!INITDB!"=="y" (
+  set /p CONFIRM="⚠️  Are you SURE? This wipes all data. (y/N) "
+  if /i "!CONFIRM!"=="y" (
+    echo 🏗️  Building database...
+    node backend/scripts/init_db.js
+  ) else (
+    echo ❌ Reset cancelled.
+  )
+) else (
+  echo Reset skipped.
+)
 
-:init_db
-echo Initializing database...
-cd /d "%~dp0backend"
-node "init_db.js"
-cd ..
-goto continue
-
-:continue
-REM Start backend
-cd /d "%~dp0backend"
-if not exist "node_modules" npm install
-:: we use start to open a new terminal window
-:: that way, backend and frontend can run at the same time without blocking each other
-echo Starting server...
-start cmd /k "node index.js"
-
-REM Start frontend
-cd ..
-cd /d "%~dp0frontend"
-if not exist "node_modules" npm install
-echo Starting frontend...
-start cmd /k "npm start"
-
-echo All servers started.
-pause
+:: 3. start the entire Workspace
+echo 🚀 Starting Frontend and Backend simultaneously...
+echo Press Ctrl+C to stop both servers.
+echo ------------------------------------------
+:: concurrently command set up in root package.json
+call npm run dev

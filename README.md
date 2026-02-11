@@ -19,6 +19,10 @@ Make sure you have Node.js installed.
 ```bat
 .\start_project.bat
 ```
+- MacOS: Make sure the file is executable on your Mac by running this in your terminal:
+```sh
+chmod +x start_project.sh
+```
 - Linux / MacOS
 ```sh
 cd backend

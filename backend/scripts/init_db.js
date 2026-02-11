@@ -4,23 +4,33 @@
 
 const sqlite3 = require('sqlite3').verbose();
 const fs = require('fs');
+const path = require('path');
 
-const dbFile = '../database.db';
-const schemaFile = '../../schema.sql';
+// path.join to avoid issues between OS's paths
+const dbFile = path.join(__dirname, '../database.db');
+const schemaFile = path.join(__dirname, '../../schema.sql');
 
-// Delete existing database
-fs.unlinkSync(dbFile);
+// Delete existing database only if it exists
+if (fs.existsSync(dbFile)){
+    fs.unlinkSync(dbFile);
+    console.log('Old database deleted.');
+}
 
 const db = new sqlite3.Database(dbFile, (err) => {
     if (err) return console.error(err.message);
-    console.log('Connected to database.');
+    console.log('Connected to SQLite database.');
 });
 
 const schema = fs.readFileSync(schemaFile, 'utf8');
 
-db.exec(schema, (err) => {
-    if (err) return console.error(err.message);
-    console.log('Database initialized successfully!');
+db.serialize(() => {
+    db.exec(schema, (err) => {
+        if (err) {
+            console.error('Schema Execution Error:', err.message);
+        } else {
+            console.log('Database initialized successfully with schema.sql!');
+        }
+    });
 });
 
 db.close();
