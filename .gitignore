@@ -1,0 +1,18 @@
+# dependencies
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# databases
+backend/database.db
+
+# environment Variables
+.env
+.env.local
+
+# build outputs
+frontend/build/
+frontend/dist/
+
+# system files
+.DS_Store
