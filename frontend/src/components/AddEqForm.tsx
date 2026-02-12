@@ -7,7 +7,7 @@ const AddEqForm: React.FC<EquipmentFormProps> = ({ onEquipmentAdded }) => {
   const { formData, updateField, submitForm, locations, loading, error } = useAddEqForm(onEquipmentAdded);
 
   return (
-    <form onSubmit={submitForm} className="card-form">
+    <form onSubmit={submitForm}>
       <h2>Add New Equipment</h2>
       {error && <p className="error-text">{error}</p>}
       

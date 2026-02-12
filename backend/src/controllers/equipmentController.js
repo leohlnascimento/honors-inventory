@@ -22,6 +22,9 @@ exports.getAll = (req, res) => {
 
 exports.create = (req, res) => {
     const { ceiModel, ceiEqType, ceiLocId } = req.body;
+    if (!ceiModel || !ceiEqType || isNaN(ceiLocId)) {
+        return res.status(400).json({ error: "Missing or invalid required fields" });
+    }
     const query = `INSERT INTO equipment (model, equipment_type, location_id) VALUES (?, ?, ?)`;
     db.run(query, [ceiModel, ceiEqType, ceiLocId], function(err) {
         if (err) return res.status(500).json({ error: err.message });

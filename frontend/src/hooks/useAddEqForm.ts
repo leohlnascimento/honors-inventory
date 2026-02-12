@@ -14,13 +14,32 @@ export const useAddEqForm = (onSuccess: () => void) => {
 
   const submitForm = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const model = formData.model.trim();
+    const type = formData.type.trim();
+
+    if (model.length < 3) {
+      setError('Model name is too short (min 3 chars)');
+      return;
+    }
+
+    if (type.length < 3) {
+      setError('Type name is too short (min 3 chars)');
+      return;
+    }
+    
+    if (!formData.loc_id) {
+      setError('Please select a valid location');
+      return;
+    }
+
     setLoading(true);
     setError('');
 
     try {
       await addEquipment({ 
-        ceiModel: formData.model, 
-        ceiEqType: formData.type, 
+        ceiModel: model, 
+        ceiEqType: type, 
         ceiLocId: Number(formData.loc_id) 
       });
       setFormData({ model: '', type: '', loc_id: '' });
