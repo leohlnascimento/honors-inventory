@@ -1,86 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import { Equipment } from '../types';
-import EquipmentList from '../components/EquipmentList';
-import EquipmentForm from '../components/EquipmentForm';
-import TransferForm from '../components/TransferForm';
-import { getAllEquipment } from '../api/equipmentApi';
+import React from 'react';
 import './App.css';
+import { Search } from 'lucide-react';
+import { useDashboard } from '../hooks/useDashboard';
+import { StatsGrid } from '../components/StatsGrid';
+import { DashboardSidebar } from '../components/DashboardSidebar';
+import EqList from '../components/EqList';
 
 const App: React.FC = () => {
-  const [equipment, setEquipment] = useState<Equipment[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const [editing, setEditing] = useState<Equipment | null>(null); // lift editing state here
-
-  // form visibility states
-  const [showAddForm, setShowAddForm] = useState(false);
-  const [showTransferForm, setShowTransferForm] = useState(false);
-
-  // fetch equipment on initial load
-  useEffect(() => {
-    getAllEquipment()
-      .then(res => setEquipment(res.data))
-      .catch(() => setError('Failed to fetch equipment'))
-      .finally(() => setLoading(false));
-  }, []);
-
-  // callback for when new equipment is added
-  const handleEquipmentAdded = () => {
-    setLoading(true);
-    getAllEquipment()
-      .then(res => setEquipment(res.data))
-      .catch(() => setError('Failed to fetch equipment'))
-      .finally(() => setLoading(false));
-  };
+  const d = useDashboard();
 
   return (
-    <div className="App">
-      <h1>Honors Inventory</h1>
+    <div className="dashboard-container">
+      <header className='dashboard-header'>
+        <h1>Honors Inventory Management</h1>
+        <p className="subtitle">Track university equipment assets</p>
+      </header>
 
-      <EquipmentList
-        equipment={equipment}
-        loading={loading}
-        error={error}
-        setEquipment={setEquipment}
-        setShowAddForm={setShowAddForm}
-        setShowTransferForm={setShowTransferForm}
-        editing={editing}
-        setEditing={setEditing}
-      />
+      <main className='max-w-7xl mx-auto p-6'>
+        <StatsGrid equipment={d.equipment} />
 
-      <div style={{ marginBottom: '20px' }}>
-        <button
-          onClick={() => {
-            setShowAddForm((prev) => !prev);
-            setShowTransferForm(false);
-            setEditing(null); // close edit form
-          }}
-        >
-          {showAddForm ? 'Hide Add Equipment Form' : 'Add New Equipment'}
-        </button>
+        <div className="main-layout">
+          <section className="inventory-section">
+            <div className="search-bar">
+              <Search size={20} />
+              <input placeholder="Search..." value={d.searchTerm} onChange={e => d.setSearchTerm(e.target.value)} />
+            </div>
+            
+            <EqList 
+              equipment={d.filteredData} loading={d.loading} error={d.error}
+              setEquipment={() => d.refresh()} 
+              setShowAddForm={d.setShowAddForm} setShowTransferForm={d.setShowTransferForm}
+              editing={d.editing} setEditing={d.setEditing}
+            />
+          </section>
 
-        <button
-          onClick={() => {
-            setShowTransferForm((prev) => !prev);
-            setShowAddForm(false);
-            setEditing(null); // close edit form
-          }}
-          style={{ marginLeft: '10px' }}
-        >
-          {showTransferForm ? 'Hide Transfer Form' : 'Transfer Equipment'}
-        </button>
-      </div>
-
-      <div className={`form-container ${showAddForm ? 'show' : ''}`}>
-        <EquipmentForm onEquipmentAdded={handleEquipmentAdded} />
-      </div>
-
-      <div className={`form-container ${showTransferForm ? 'show' : ''}`}>
-        <TransferForm equipment={equipment} setEquipment={setEquipment} />
-      </div>
-
-      {/* <EquipmentForm onEquipmentAdded={handleEquipmentAdded} /> */}
-      {/* <TransferForm equipment={equipment} setEquipment={setEquipment} /> */}
+          <DashboardSidebar d={d} />
+        </div>
+      </main>
     </div>
   );
 };
