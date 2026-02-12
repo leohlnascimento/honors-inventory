@@ -19,7 +19,7 @@ const EqList: React.FC<any> = (props) => {
       </div>
       
       {props.editing && (
-        <div className="edit-form-container show">
+        <div>
           <EditEqForm equipment={props.editing} onClose={handleCloseEdit} onUpdate={handleUpdate} />
         </div>
       )}

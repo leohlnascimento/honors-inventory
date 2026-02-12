@@ -8,7 +8,7 @@ const TransferEqForm: React.FC<{ equipment: Equipment[], onTransferComplete: () 
   return (
     <div className="form-inner">
       <h2>Transfer Asset</h2>
-      <form onSubmit={submitTransfer} className="space-y-4">
+      <form onSubmit={submitTransfer}>
         <select 
           value={formData.equipmentId} 
           onChange={e => setFormData({ ...formData, equipmentId: e.target.value })}

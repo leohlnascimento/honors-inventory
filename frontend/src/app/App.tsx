@@ -28,7 +28,11 @@ const App: React.FC = () => {
           <section className="inventory-section">
             <div className="search-bar">
               <Search size={20} />
-              <input placeholder="Search..." value={d.searchTerm} onChange={e => d.setSearchTerm(e.target.value)} />
+              <input className="search-bar input"
+                placeholder="Search..."
+                value={d.searchTerm}
+                onChange={e => d.setSearchTerm(e.target.value)}
+              />
             </div>
             
             <EqList 

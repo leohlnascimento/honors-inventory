@@ -66,8 +66,39 @@ button[type="submit"] {
 
 button[type="submit"]:hover { background: var(--primary-hover); }
 
-.btn-edit { color: var(--primary); border: none; background: none; cursor: pointer; margin-right: 1rem; font-weight: 600; }
-.btn-delete { color: var(--danger); border: none; background: none; cursor: pointer; font-weight: 600; }
+.btn-edit {
+  color: var(--primary);
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin-right: 1rem;
+  font-weight: 600;
+  transition: transform 0.1s ease, color 0.2s ease;
+}
+
+.btn-edit:hover {
+  color: #1056ec;
+  background-color: #f6f8ff;
+  transform: scale(1.1);
+  border-radius: 4px;
+}
+
+.btn-delete {
+  color: var(--danger);
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 12px;
+  transition: transform 0.1s ease, color 0.2s ease;
+}
+
+.btn-delete:hover {
+  color: #dc2626;
+  transform: scale(1.1);
+  background-color: rgba(239, 68, 68, 0.05);
+  border-radius: 4px;
+}
 
 @keyframes slideIn {
   from { opacity: 0; transform: translateY(10px); }
