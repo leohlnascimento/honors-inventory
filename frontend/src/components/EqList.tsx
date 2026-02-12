@@ -16,7 +16,6 @@ const EqList: React.FC<any> = (props) => {
     <div className="list-container">
       <div className="list-header">
         <h2>Current Inventory</h2>
-        <span className="count">{props.equipment.length} items</span>
       </div>
       
       {props.editing && (

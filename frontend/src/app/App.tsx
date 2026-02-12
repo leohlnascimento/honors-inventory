@@ -1,5 +1,8 @@
 import React from 'react';
 import './App.css';
+import '../styles/StatsGrid.css';
+import '../styles/Inventory.css';
+import '../styles/Forms.css';
 import { Search } from 'lucide-react';
 import { useDashboard } from '../hooks/useDashboard';
 import { StatsGrid } from '../components/StatsGrid';
@@ -12,8 +15,10 @@ const App: React.FC = () => {
   return (
     <div className="dashboard-container">
       <header className='dashboard-header'>
-        <h1>Honors Inventory Management</h1>
-        <p className="subtitle">Track university equipment assets</p>
+        <div className='max-w-7xl'>
+          <h1>Honors Inventory Management</h1>
+          <p className="subtitle">Track university equipment assets</p>
+        </div>
       </header>
 
       <main className='max-w-7xl mx-auto p-6'>
