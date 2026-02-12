@@ -1,21 +1,23 @@
 export type BuildingType = 'Classroom' | 'Office' | 'Warehouse';
 
 export interface Location {
-  id: number;
-  room_name: string;
-  building_type: BuildingType;
+  locId: number;
+  locRoomName: string;
+  locBuildingType: BuildingType;
 }
 
 export interface Equipment {
-  id: number;
-  model: string;
-  equipment_type: string;
-  updated_at?: string;
-  loc?: Location;
+  eqId: number;
+  eqModel: string;
+  eqType: string;
+  eqLocId: number;
+  eqUpdatedAt?: string;
+  eqRoomName?: string;
+  eqBuildingType?: BuildingType;
 }
 
 export interface CreateEquipmentInput {
-  model: string;
-  equipment_type: string;
-  location_id: number;
+  ceiModel: string;
+  ceiEqType: string;
+  ceiLocId: number;
 }

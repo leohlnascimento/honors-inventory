@@ -4,7 +4,7 @@ import { useLocations } from './useLocations';
 
 export const useAddEqForm = (onSuccess: () => void) => {
   const { locations, locationError } = useLocations();
-  const [formData, setFormData] = useState({ model: '', type: '', locationId: '' });
+  const [formData, setFormData] = useState({ model: '', type: '', loc_id: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -19,11 +19,11 @@ export const useAddEqForm = (onSuccess: () => void) => {
 
     try {
       await addEquipment({ 
-        model: formData.model, 
-        equipment_type: formData.type, 
-        location_id: Number(formData.locationId) 
+        ceiModel: formData.model, 
+        ceiEqType: formData.type, 
+        ceiLocId: Number(formData.loc_id) 
       });
-      setFormData({ model: '', type: '', locationId: '' });
+      setFormData({ model: '', type: '', loc_id: '' });
       onSuccess();
     } catch {
       setError('Failed to add equipment');

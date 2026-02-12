@@ -14,7 +14,7 @@ export const useDashboard = () => {
   const fetchData = () => {
     setLoading(true);
     getAllEquipment()
-      .then(res => setEquipment(res.data))
+      .then(res => setEquipment(res.data.data))
       .catch(() => setError('Failed to fetch equipment'))
       .finally(() => setLoading(false));
   };
@@ -22,8 +22,9 @@ export const useDashboard = () => {
   useEffect(() => { fetchData(); }, []);
 
   const filteredData = equipment.filter(eq =>
-    eq.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    eq.equipment_type.toLowerCase().includes(searchTerm.toLowerCase())
+  // Use eqModel and eqType to match your new types
+  (eq.eqModel?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
+  (eq.eqType?.toLowerCase() || '').includes(searchTerm.toLowerCase())
   );
 
   return {

@@ -26,13 +26,13 @@ const AddEqForm: React.FC<EquipmentFormProps> = ({ onEquipmentAdded }) => {
       />
       
       <select 
-        value={formData.locationId} 
-        onChange={e => updateField('locationId', e.target.value)} 
+        value={formData.loc_id} 
+        onChange={e => updateField('loc_id', e.target.value)} 
         required
       >
         <option value="">Select location</option>
-        {locations.map(loc => (
-          <option key={loc.id} value={loc.id}>{loc.room_name}</option>
+        {locations.map(l => (
+          <option key={l.locId} value={l.locId}>{l.locRoomName}</option>
         ))}
       </select>
 

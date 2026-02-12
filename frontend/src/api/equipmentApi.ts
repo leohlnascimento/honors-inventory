@@ -6,7 +6,7 @@ import { Equipment, CreateEquipmentInput } from '../types';
 
 const API_URL = 'http://localhost:3001/equipment'; // my backend
 
-export const getAllEquipment = () => axios.get<Equipment[]>(API_URL);
+export const getAllEquipment = () => axios.get<{ data: Equipment[] }>(API_URL);
 
 export const addEquipment = (data: CreateEquipmentInput) =>
     axios.post<Equipment>(API_URL, data);
@@ -15,8 +15,8 @@ export const addEquipment = (data: CreateEquipmentInput) =>
 export const updateEquipment = (id: number, data: Partial<CreateEquipmentInput>) =>
     axios.put<Equipment>(`${API_URL}/${id}`, data);
 
-export const transferEquipment = (id: number, location_id: number) =>
-    axios.patch(`${API_URL}/${id}/transfer`, { location_id });
+export const transferEquipment = (id: number, ceiLocId: number) =>
+    axios.patch(`${API_URL}/${id}/transfer`, { ceiLocId });
 
 export const deleteEquipment = (id: number) =>
     axios.delete(`${API_URL}/${id}`);

@@ -8,8 +8,8 @@ export const useEditEqForm = (
   onClose: () => void
 ) => {
   const [formData, setFormData] = useState({
-    model: initialEquipment.model,
-    type: initialEquipment.equipment_type,
+    model: initialEquipment.eqModel,
+    type: initialEquipment.eqType,
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -24,16 +24,16 @@ export const useEditEqForm = (
     setError('');
 
     try {
-      await updateEquipment(initialEquipment.id, {
-        model: formData.model,
-        equipment_type: formData.type,
-        location_id: initialEquipment.loc?.id || 0, 
+      await updateEquipment(initialEquipment.eqId, {
+        ceiModel: formData.model,
+        ceiEqType: formData.type,
+        ceiLocId: initialEquipment.eqLocId || 0, 
       });
 
       onUpdate({ 
         ...initialEquipment, 
-        model: formData.model, 
-        equipment_type: formData.type 
+        eqModel: formData.model, 
+        eqType: formData.type 
       });
       onClose();
     } catch {

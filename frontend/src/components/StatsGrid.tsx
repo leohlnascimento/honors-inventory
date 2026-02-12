@@ -5,8 +5,8 @@ import { Equipment } from '../types';
 export const StatsGrid: React.FC<{ equipment: Equipment[] }> = ({ equipment }) => (
   <div className="stats-grid">
     <StatCard icon={<Package />} label="Total Items" value={equipment.length} />
-    <StatCard icon={<LayoutGrid />} label="Categories" value={new Set(equipment.map(e => e.equipment_type)).size} color="blue" />
-    <StatCard icon={<MapPin />} label="Active Rooms" value={new Set(equipment.map(e => e.loc?.id)).size} color="green" />
+    <StatCard icon={<LayoutGrid />} label="Categories" value={new Set(equipment.map(e => e.eqType)).size} color="blue" />
+    <StatCard icon={<MapPin />} label="Active Rooms" value={new Set(equipment.map(e => e.eqLocId)).size} color="green" />
   </div>
 );
 

@@ -15,17 +15,17 @@ const TransferEqForm: React.FC<{ equipment: Equipment[], onTransferComplete: () 
         >
           <option value="">Select Asset...</option>
           {equipment.map(eq => (
-            <option key={eq.id} value={eq.id}>{eq.model} ({eq.loc?.room_name})</option>
+            <option key={eq.eqId} value={eq.eqId}>{eq.eqModel} ({eq.eqRoomName})</option>
           ))}
         </select>
 
         <select 
-          value={formData.locationId} 
-          onChange={e => setFormData({ ...formData, locationId: e.target.value })}
+          value={formData.loc_id} 
+          onChange={e => setFormData({ ...formData, loc_id: e.target.value })}
         >
           <option value="">Target Location...</option>
-          {locations.map(loc => (
-            <option key={loc.id} value={loc.id}>{loc.room_name}</option>
+          {locations.map(l => (
+            <option key={l.locId} value={l.locId}>{l.locRoomName}</option>
           ))}
         </select>
 

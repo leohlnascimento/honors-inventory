@@ -33,7 +33,7 @@ const EqList: React.FC<any> = (props) => {
           </thead>
           <tbody>
             {props.equipment.map((eq: Equipment) => (
-              <EqRow key={eq.id} eq={eq} onEdit={handleEditClick} onDelete={handleDelete} />
+              <EqRow key={eq.eqId} eq={eq} onEdit={handleEditClick} onDelete={handleDelete} />
             ))}
           </tbody>
         </table>

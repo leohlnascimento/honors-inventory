@@ -4,7 +4,12 @@ exports.getAll = (req, res) => {
     const query = `SELECT id, room_name, building_type FROM locations`;
     db.all(query, [], (err, rows) => {
         if (err) return res.status(500).json({ error: err.message });
-        res.json({ data: rows }); //'data' to match frontend API calls
+        const data = rows.map(row => ({
+            locId: row.id,
+            locRoomName: row.room_name,
+            locBuildingType: row.building_type
+        }));
+        res.json({ data });
     });
 };
 

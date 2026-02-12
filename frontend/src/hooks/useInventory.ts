@@ -10,7 +10,7 @@ export const useInventory = (
     if (!window.confirm('Are you sure?')) return;
     try {
       await deleteEquipment(id);
-      setEquipment(prev => prev.filter(eq => eq.id !== id));
+      setEquipment(prev => prev.filter(eq => eq.eqId !== id));
     } catch {
       alert('Failed to delete equipment.');
     }
@@ -26,7 +26,7 @@ export const useInventory = (
   };
 
   const handleUpdate = (updated: Equipment) => {
-    setEquipment(prev => prev.map(eq => eq.id === updated.id ? updated : eq));
+    setEquipment(prev => prev.map(eq => eq.eqId === updated.eqId ? updated : eq));
   };
 
   return { handleDelete, handleEditClick, handleCloseEdit, handleUpdate };
